@@ -1,14 +1,16 @@
-import { Document, Page } from "react-pdf";
-// import "react-pdf/dist/esm/Page/AnnotationLayer.css";
+const SERVER_URL = "http://localhost:3000";
 
-function PDFViewer1({ pdfUrl }) {
+const SignedPDFViewer = (pdfUrl) => {
+  const fullUrl =
+    pdfUrl && pdfUrl["pdfUrl"].startsWith("http")
+      ? pdfUrl["pdfUrl"]
+      : `${SERVER_URL}${pdfUrl["pdfUrl"]}`;
+
   return (
-    <div className="w-full h-screen overflow-auto">
-      <Document file={pdfUrl}>
-        <Page pageNumber={1} />
-      </Document>
+    <div style={{ width: "100%", height: "80vh" }}>
+      <iframe src={fullUrl} width="800" height="600"></iframe>
     </div>
   );
-}
+};
 
-export default PDFViewer1;
+export default SignedPDFViewer;
