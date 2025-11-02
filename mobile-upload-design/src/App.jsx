@@ -9,11 +9,11 @@ function App() {
 
   const handleUpload = async (file) => {
     console.log("Uploading file:", file);
-    setLoading(true);
+    // setLoading(true);
     try {
       const formData = new FormData();
       formData.append("myFile", file, file.name);
-      const res = await fetch("http://localhost:3000/upload-single", {
+      const res = await fetch("http://localhost:3000/upload-and-sign", {
         method: "POST",
         body: formData,
       });
@@ -40,7 +40,8 @@ function App() {
   };
 
   return (
-    <div>
+    <div className={"flex flex-col items-center justify-center w-full gap-4"}>
+      <h3>Mobile Upload Design</h3>
       <PDFUpload onUpload={handleUpload} />
       {loading && <p>Loading...</p>}
       {signedPdfUrl && <PDFViewer1 pdfUrl={signedPdfUrl} />}
